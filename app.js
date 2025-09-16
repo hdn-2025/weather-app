@@ -1,7 +1,7 @@
 // 🔧 Configuration
 const API_KEY = '994651d5d3fbfdab668e1d319e079f81'; // Replace with your actual key
 const API_ENDPOINTS = {
-  geocoding: 'http://api.openweathermap.org/geo/1.0/direct',
+  geocoding: 'https://api.openweathermap.org/geo/1.0/direct',
   forecast: 'https://api.openweathermap.org/data/2.5/forecast'
 };
 
@@ -70,9 +70,12 @@ clearRecentBtn.addEventListener('click', () => {
 
 // 🌐 Convert city name to coordinates
 function fetchCoordsFromCity(city) {
-  const geoURL = `${API_ENDPOINTS.geocoding}?q=${city}&limit=1&appid=${API_KEY}`;
+  const geoURL = `${API_ENDPOINTS.geocoding}?q=${encodeURIComponent(city)}&limit=1&appid=${API_KEY}`;
   fetch(geoURL)
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error('Failed to fetch location data.');
+      return res.json();
+    })
     .then(data => {
       if (!data.length) throw new Error('City not found.');
       const { lat, lon, name } = data[0];
@@ -87,7 +90,10 @@ function fetchCoordsFromCity(city) {
 function fetchWeatherByCoords(lat, lon, cityName = '') {
   const weatherURL = `${API_ENDPOINTS.forecast}?lat=${lat}&lon=${lon}&units=${unit}&appid=${API_KEY}`;
   fetch(weatherURL)
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error('Failed to fetch weather data.');
+      return res.json();
+    })
     .then(data => {
       displayCurrentWeather(data.list[0], cityName);
       displayForecast(data.list);
@@ -184,5 +190,6 @@ function showMessage(msg) {
 
 // 🚀 Initialize recent cities on load
 window.addEventListener('DOMContentLoaded', renderRecentCities);
+
 
 
