@@ -185,3 +185,4 @@ function showMessage(msg) {
 // 🚀 Initialize recent cities on load
 window.addEventListener('DOMContentLoaded', renderRecentCities);
 
+
