@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Forecast App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen transition-all duration-300">
+  <div class="max-w-4xl mx-auto p-4">
+    <!-- App Title -->
+    <h1 class="text-3xl font-bold text-center mb-6">🌦️ Weather Forecast</h1>
+
+    <!-- Search & Location Controls -->
+    <div class="flex flex-col md:flex-row gap-4 mb-4">
+      <input
+        id="cityInput"
+        type="text"
+        placeholder="Enter city name"
+        class="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+      <button
+        id="searchBtn"
+        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition duration-200"
+      >
+        Search
+      </button>
+      <button
+        id="locationBtn"
+        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition duration-200"
+      >
+        Use My Location
+      </button>
+    </div>
+
+    <!-- Recent Cities Dropdown -->
+    <div id="recentCities" class="mb-4 hidden">
+      <label class="block mb-2 font-semibold">Recent Searches:</label>
+      <select
+        id="cityDropdown"
+        class="p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+      ></select>
+      <button id="clearRecentBtn" class="bg-red-500 text-white px-3 py-1 rounded mt-2">
+  Clear Recent Searches
+</button>
+
+    </div>
+
+    <!-- Weather Alert -->
+    <div
+      id="weatherAlert"
+      class="text-red-600 font-bold mb-2 hidden"
+    ></div>
+
+    <!-- Current Weather Display -->
+    <div
+      id="currentWeather"
+      class="bg-white p-4 rounded shadow mb-6 transition-all duration-300"
+    ></div>
+
+    <!-- Temperature Unit Toggle -->
+    <div class="flex justify-end mb-4">
+      <button
+        id="toggleUnit"
+        class="bg-black text-white text-sm px-4 py-2 rounded shadow hover:bg-gray-800 transition duration-200"
+      >
+        Switch to °F
+      </button>
+    </div>
+
+    <!-- Forecast Section -->
+    <h2 class="text-xl font-semibold mb-2">5-Day Forecast</h2>
+    <div
+      id="forecast"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+    ></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
